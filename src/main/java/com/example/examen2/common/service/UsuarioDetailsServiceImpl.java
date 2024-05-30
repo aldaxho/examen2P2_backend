@@ -33,4 +33,9 @@ public class UsuarioDetailsServiceImpl implements UserDetailsService {
         logger.info("User found: {}", usuario.getEmail());
         return new User(usuario.getEmail(), usuario.getContrasena(), Collections.emptyList());
     }
+
+    public Usuario findByEmail(String email) {
+        return usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado con el email: " + email));
+    }
 }

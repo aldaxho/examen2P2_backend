@@ -2,6 +2,7 @@ package com.example.examen2.auth;
 
 import com.example.examen2.config.jwt.JwtTokenUtil;
 import com.example.examen2.common.service.UsuarioDetailsServiceImpl;
+import com.example.examen2.common.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -40,8 +41,13 @@ public class JwtAuthenticationController {
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
 
+        // Obtener el usuario desde el servicio de detalles del usuario
+        Usuario usuario = userDetailsService.findByEmail(authenticationRequest.getUsername());
+        final String rol = usuario.getRol().getNombre();
+        final Long id = usuario.getId();
+
         logger.info("Authentication successful, token generated for user: {}", authenticationRequest.getUsername());
-        return ResponseEntity.ok(new JwtResponse(token));
+        return ResponseEntity.ok(new JwtResponse(token, rol, id));
     }
 
     private void authenticate(String username, String password) throws Exception {
