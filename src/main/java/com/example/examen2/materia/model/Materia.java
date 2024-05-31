@@ -3,6 +3,7 @@ package com.example.examen2.materia.model;
 import com.example.examen2.carrera.model.Carrera;
 import com.example.examen2.docente.model.Docente;
 import com.example.examen2.programacionacademica.model.ProgramacionAcademica;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.util.Set;
 
@@ -16,6 +17,7 @@ public class Materia {
 
     @ManyToOne
     @JoinColumn(name = "carrera_id")
+    @JsonBackReference
     private Carrera carrera;
 
     @ManyToMany(mappedBy = "materias")

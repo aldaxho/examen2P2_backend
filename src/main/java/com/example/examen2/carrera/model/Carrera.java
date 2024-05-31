@@ -1,6 +1,7 @@
 package com.example.examen2.carrera.model;
 
 import com.example.examen2.materia.model.Materia;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.util.Set;
 
@@ -15,6 +16,7 @@ public class Carrera {
 
     @ManyToOne
     @JoinColumn(name = "facultad_id")
+    @JsonBackReference
     private Facultad facultad;
 
     @OneToMany(mappedBy = "carrera")

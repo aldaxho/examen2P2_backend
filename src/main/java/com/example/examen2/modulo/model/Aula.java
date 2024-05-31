@@ -3,6 +3,7 @@ package com.example.examen2.modulo.model;
 import jakarta.persistence.*;
 import java.util.Set;
 import com.example.examen2.programacionacademica.model.ProgramacionAcademica;
+import com.example.examen2.carrera.model.Facultad;
 
 @Entity
 public class Aula {
@@ -12,6 +13,10 @@ public class Aula {
     private String nombre;
     private double latitud;  // Coordenada GPS de latitud
     private double longitud; // Coordenada GPS de longitud
+
+    @ManyToOne
+    @JoinColumn(name = "facultad_id")
+    private Facultad facultad;
 
     @OneToMany(mappedBy = "aula")
     private Set<ProgramacionAcademica> programaciones;
@@ -47,6 +52,14 @@ public class Aula {
 
     public void setLongitud(double longitud) {
         this.longitud = longitud;
+    }
+
+    public Facultad getFacultad() {
+        return facultad;
+    }
+
+    public void setFacultad(Facultad facultad) {
+        this.facultad = facultad;
     }
 
     public Set<ProgramacionAcademica> getProgramaciones() {

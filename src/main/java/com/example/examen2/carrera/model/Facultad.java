@@ -1,5 +1,6 @@
 package com.example.examen2.carrera.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.Set;
 
@@ -12,7 +13,17 @@ public class Facultad {
     private String nombre;
 
     @OneToMany(mappedBy = "facultad")
+    @JsonManagedReference
     private Set<Carrera> carreras;
+
+    // Constructor vacío
+    public Facultad() {}
+
+    // Constructor con parámetros
+    public Facultad(Long id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
 
     // Getters y Setters
     public Long getId() {
