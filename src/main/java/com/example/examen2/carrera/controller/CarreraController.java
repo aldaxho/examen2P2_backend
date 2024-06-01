@@ -1,6 +1,6 @@
 package com.example.examen2.carrera.controller;
 
-import com.example.examen2.carrera.model.Carrera;
+import com.example.examen2.carrera.model.CarreraDT0;
 import com.example.examen2.carrera.service.CarreraService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,23 +15,23 @@ public class CarreraController {
     private CarreraService carreraService;
 
     @GetMapping
-    public List<Carrera> getAllCarreras() {
+    public List<CarreraDT0> getAllCarreras() {
         return carreraService.getAllCarreras();
     }
 
     @PostMapping
-    public Carrera createCarrera(@RequestBody Carrera carrera) {
-        return carreraService.createCarrera(carrera);
+    public CarreraDT0 createCarrera(@RequestBody CarreraDT0 carreraDTO) {
+        return carreraService.createCarrera(carreraDTO);
     }
 
     @GetMapping("/{id}")
-    public Carrera getCarreraById(@PathVariable Long id) {
+    public CarreraDT0 getCarreraById(@PathVariable Long id) {
         return carreraService.getCarreraById(id);
     }
 
     @PutMapping("/{id}")
-    public Carrera updateCarrera(@PathVariable Long id, @RequestBody Carrera carreraDetails) {
-        return carreraService.updateCarrera(id, carreraDetails);
+    public CarreraDT0 updateCarrera(@PathVariable Long id, @RequestBody CarreraDT0 carreraDTO) {
+        return carreraService.updateCarrera(id, carreraDTO);
     }
 
     @DeleteMapping("/{id}")
